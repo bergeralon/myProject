@@ -1,10 +1,11 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Algorithm.Action;
 
-public class Solution {
+public class Solution implements Serializable{
 	private ArrayList<Action> actions;
 
 	public ArrayList<Action> getActions() {

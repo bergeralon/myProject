@@ -11,6 +11,7 @@ public interface SearchDomain  {
 	void printDomain();
 	HashMap<Action,State> getAllPossibleMoves(State current);	
 	
+	String getDescription();
 }
 
 

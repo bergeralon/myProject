@@ -134,6 +134,18 @@ public class MazeDomain implements SearchDomain {
 			
 			return myMap;
 		}
-	
+	@Override
+	public String getDescription()
+	{
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < rowsNum; i++)
+		{
+			for (int j = 0; j < colsNum; j++)
+			{
+				sb.append(myMaze[i][j].toString());
+			}
+		}
+		return sb.toString();
+	}
 
 }

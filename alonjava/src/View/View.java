@@ -7,5 +7,6 @@ public interface View {
 	void displayCurrentState();
 	void displaySolution(Solution solution);
 	String getUserAction();
+	void showMessage(String msg);
 	
 }

@@ -40,7 +40,7 @@ public class Presenter implements Observer {
 			if (arr.length > 1)
 				args = arr[1];
 			
-			commands.doCommand(model, commandName, args);
+			commands.doCommand(model, view, commandName, args);
 		}
 	}
 	

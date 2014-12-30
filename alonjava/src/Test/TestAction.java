@@ -12,7 +12,7 @@ import Domain.ParkingLotDomain;
 
 public class TestAction {
 
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 		
 		SearchDomain domain1 = new MazeDomain(6,6,15);
 		
@@ -62,4 +62,5 @@ public class TestAction {
 		System.out.println("\nStarted at - "+startTime+"\nEnded at - "+endTime+"\n\nIt took only - "+( endTime - startTime)+" milliSeconds");
 	
 	}
+	
 }

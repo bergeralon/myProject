@@ -126,6 +126,11 @@ public class ParkingLotDomain implements SearchDomain {
 			
 			return myMap;
 		}
+	@Override
+	public String getDescription()
+	{
+		return null;
+	}
 	
 
 }

@@ -41,8 +41,12 @@ public class MazeState extends State {
 		this.j = j;
 	}
 
-	
-	
+	@Override
+	public String toString()
+	{
+		return "MazeState [i=" + i + ", j=" + j + ", isWall=" + isWall + "]";
+	}
+
 	@Override	// Heuristic evaluation
 	public double getEvaluation(State goal) {
 		MazeState goal1 = (MazeState)goal;

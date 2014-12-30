@@ -1,7 +1,9 @@
 package Algorithm;
 
+import java.io.Serializable;
 
-public class Action {
+
+public class Action implements Serializable{
 
 	String description;
 	private double price = 10;

@@ -4,5 +4,6 @@ public interface Model {
 	void selectAlgorithm(String algorithmName);
 	void solveDomain();
 	Solution getSolution();
-	void printCurrentState();	
+	void printCurrentState();
+	boolean isCalculated();	
 }
