@@ -27,21 +27,23 @@ public class ParkingLotDomain implements SearchDomain, Serializable {
 		initCars(v);
 
 	}
-	public void printDomain(){
-		printParkingLot();
+	public String printDomain(){
+		return printParkingLot();
 	}
 	
-	public void printParkingLot() {
+	public String  printParkingLot() {
 				
+		String result = "";
 		for (int i = 0; i < rowsNum; i++) {
 			for (int j = 0; j < colsNum; j++) {
 				
 				if(myParkingLot[i][j].getIsCar() == true)
-					System.out.print(" [c] ");
-				else System.out.print(" [ ] ");
+					result += " [c] ";
+				else result += " [ ] ";
 			}
-			System.out.println();
+			result += "\n";
 		}
+		return result;
 	}
 	
 	public int getRegularPrice(){

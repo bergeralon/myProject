@@ -3,6 +3,7 @@ package View;
 import java.util.Observable;
 import java.util.Scanner;
 
+import clientServer.MyProperties;
 import Algorithm.Action;
 import Model.Solution;
 
@@ -12,7 +13,8 @@ public class MyConsoleView extends Observable implements View {
 	
 	@Override
 	public void start() {
-		System.out.println("Welcome to my project :)");
+		MyProperties m = new MyProperties();
+		System.out.println("Welcome to " + m.program_name + " :)");
 		action = "";
 		Scanner scanner = new Scanner(System.in);
 		do

@@ -1,4 +1,7 @@
 package Model;
+
+import Algorithm.SearchDomain;
+
 public interface Model {
 	void selectDomain(String domainName);
 	void selectAlgorithm(String algorithmName);
@@ -6,4 +9,5 @@ public interface Model {
 	Solution getSolution();
 	void printCurrentState();
 	boolean isCalculated();	
+	SearchDomain getDomain();
 }

@@ -37,6 +37,7 @@ public class MyTCPIPServer {
 							ClientHandler handler = new ClientHandler(socket);
 							executor.submit(handler);
 						}
+						System.out.println("Finished executing");
 						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -58,6 +59,16 @@ public class MyTCPIPServer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) throws IOException, InterruptedException
+	{
+		System.out.println("Server started...");
+		MyProperties m = new MyProperties();
+		MyTCPIPServer server = new MyTCPIPServer(m.port);
+		server.startServer(10);
+		server.thread.join();
+		server.stopServer();
 	}
 	
 }

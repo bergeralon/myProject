@@ -14,11 +14,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class MyProperties implements Serializable
 {
 	@XmlElement
-	public String program_name;
-	@XmlElement
-	public String ip;
-	@XmlElement
 	public int port;
+	@XmlElement
+	public int numOfClients;
 
 	public MyProperties()
 	{
@@ -29,9 +27,8 @@ public class MyProperties implements Serializable
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			MyProperties p = (MyProperties) jaxbUnmarshaller
 					.unmarshal(new File("properties.xml"));
-			ip = p.ip;
 			port = p.port;
-			program_name = p.program_name;
+			numOfClients = p.numOfClients;
 		} catch (JAXBException e)
 		{
 

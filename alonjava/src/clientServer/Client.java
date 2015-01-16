@@ -10,18 +10,18 @@ import Model.Solution;
 
 public class Client {
 	
-	public Solution getSolution(SearchDomain problem) {		
+	public Solution getSolution(String domain, String algo, String ip, int port) {		
 		Socket socket = null;
 		ObjectInputStream in = null;
 		ObjectOutputStream out = null;
 		
 		try {
-			MyProperties props = new MyProperties();
-			socket = new Socket(props.ip, props.port);
+			socket = new Socket(ip, port);
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
 						
-			out.writeObject(problem);			
+			out.writeObject(domain);			
+			out.writeObject(algo);			
 			return (Solution)in.readObject();	
 								
 		} catch (IOException e) {			
@@ -34,7 +34,7 @@ public class Client {
 				out.close();
 				in.close();
 				socket.close();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			

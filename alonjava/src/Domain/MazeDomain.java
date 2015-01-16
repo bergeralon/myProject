@@ -27,22 +27,24 @@ public class MazeDomain implements SearchDomain, Serializable {
 		initWalls(w);
 
 	}
-	public void printDomain(){
-		printMaze();
+	public String printDomain(){
+		return printMaze();
 	}
 	
-	public void printMaze() {
+	public String printMaze() {
 				
+		String result = "";
 		for (int i = 0; i < rowsNum; i++) {
 			for (int j = 0; j < colsNum; j++) {
 				
 				if(myMaze[i][j].getIsWall() == true)
-					System.out.print(" [x] ");
-				else System.out.print(" [ ] ");
+					result += " [x] ";
+				else result += " [ ] ";
 			}
-			System.out.println();
+			result += "\n";
 		}
-		System.out.println();
+		result += "\n";
+		return result;
 	}
 	
 	public int getRegularPrice(){

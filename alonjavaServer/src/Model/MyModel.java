@@ -15,7 +15,6 @@ public class MyModel extends Observable implements Model {
 	private Solution solution;
 	private boolean calculating = false;
 	
-	private SolutionManager solutionManager = new SolutionManager();
 	
 	public MyModel()
 	{
@@ -37,28 +36,22 @@ public class MyModel extends Observable implements Model {
 
 	@Override
 	public void solveDomain() {
+		SolutionManager solutionManager = new SolutionManager();
 		Solution sol = solutionManager.get(domain.getDescription());
 		if (sol == null)
 		{
-			new Thread(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					calculating = true;
-					sleepSomeTime();
-					long startTime = System.currentTimeMillis();
-					ArrayList<Action> actions = algorithm.search(domain);
-					long endTime = System.currentTimeMillis();
-					System.out.println("\nStarted at - "+startTime+"\nEnded at - "+endTime+"\n\nIt took only - "+( endTime - startTime)+" milliSeconds");
-					solution = new Solution();
-					solution.setActions(actions);
-					solutionManager.put(domain.getDescription(), solution);
-					calculating = false;
-					setChanged();
-					notifyObservers();
-				}
-			}).start();
+			calculating = true;
+			sleepSomeTime();
+			long startTime = System.currentTimeMillis();
+			ArrayList<Action> actions = algorithm.search(domain);
+			long endTime = System.currentTimeMillis();
+			System.out.println("\nStarted at - "+startTime+"\nEnded at - "+endTime+"\n\nIt took only - "+( endTime - startTime)+" milliSeconds");
+			solution = new Solution();
+			solution.setActions(actions);
+			solutionManager.put(domain.getDescription(), solution);
+			calculating = false;
+			setChanged();
+			notifyObservers();
 		}
 		else
 		{
@@ -93,6 +86,12 @@ public class MyModel extends Observable implements Model {
 	public boolean isCalculated()
 	{
 		return !calculating;
+	}
+
+	@Override
+	public SearchDomain getDomain()
+	{
+		return domain;
 	}
 
 }

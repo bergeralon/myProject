@@ -2,6 +2,7 @@ package Presenter;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 
 import Model.Model;
 import Model.MyModel;
@@ -26,6 +27,8 @@ public class Presenter implements Observer {
 		if (observable == model)
 		{
 			Solution solution = model.getSolution();
+			System.out.println();
+			System.out.println("Got solution!");
 			model.printCurrentState();
 			view.displaySolution(solution);
 		}

@@ -3,14 +3,16 @@ package Model;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import clientServer.Client;
+import clientServer.MyProperties;
 import Algorithm.Action;
 import Algorithm.SearchDomain;
 import Algorithm.Searcher;
 
 public class MyModel extends Observable implements Model {
 	
-	private SearchDomain domain;
-	private Searcher algorithm;
+	private String domain;
+	private String algorithm;
 	private SearchAlgorithmsFactory algorithmsFactory;
 	private Solution solution;
 	private boolean calculating = false;
@@ -27,47 +29,43 @@ public class MyModel extends Observable implements Model {
 		String[] arr = args.split(":");
 		String domainName = arr[0];
 		String domainArgs = arr[1];
-		domain = DomainFactory.createDomain(domainName,domainArgs);
+		domain = args;
 	}
 	
 	@Override
 	public void selectAlgorithm(String algorithmName) {
-		algorithm = algorithmsFactory.createAlgorithm(algorithmName);
+		algorithm = algorithmName;
 	}
 
 	@Override
 	public void solveDomain() {
-		Solution sol = solutionManager.get(domain.getDescription());
-		if (sol == null)
-		{
 			new Thread(new Runnable()
 			{
 				@Override
 				public void run()
 				{
-					calculating = true;
-					sleepSomeTime();
-					long startTime = System.currentTimeMillis();
-					ArrayList<Action> actions = algorithm.search(domain);
-					long endTime = System.currentTimeMillis();
-					System.out.println("\nStarted at - "+startTime+"\nEnded at - "+endTime+"\n\nIt took only - "+( endTime - startTime)+" milliSeconds");
-					solution = new Solution();
-					solution.setActions(actions);
-					solutionManager.put(domain.getDescription(), solution);
-					calculating = false;
+					MyProperties m = new MyProperties();
+					Client client = new Client();
+					solution = client.getSolution(domain, algorithm, m.ip, m.port);
+					
+//					Moved to server.
+//					
+//					calculating = true;
+//					sleepSomeTime();
+//					long startTime = System.currentTimeMillis();
+//					ArrayList<Action> actions = algorithm.search(domain);
+//					long endTime = System.currentTimeMillis();
+//					System.out.println("\nStarted at - "+startTime+"\nEnded at - "+endTime+"\n\nIt took only - "+( endTime - startTime)+" milliSeconds");
+//					solution = new Solution();
+//					solution.setActions(actions);
+//					solutionManager.put(domain.getDescription(), solution);
+//					calculating = false;
+					
+					
 					setChanged();
 					notifyObservers();
 				}
 			}).start();
-		}
-		else
-		{
-			System.out.println("Found cached solution!");
-			solution = sol;
-			this.setChanged();
-			this.notifyObservers();
-		}
-		
 	}
 
 	public void sleepSomeTime()
@@ -86,7 +84,8 @@ public class MyModel extends Observable implements Model {
 	}
 	@Override
 	public void printCurrentState() {
-		domain.printDomain();
+		if (solution != null)
+			System.out.println(solution.getFirstState());
 	}
 
 	@Override
