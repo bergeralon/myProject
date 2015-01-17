@@ -37,5 +37,18 @@ public class MyProperties implements Serializable
 
 		}
 	}
+	
+	public void save() {
+		JAXBContext jaxbContext;
+		try
+		{
+			jaxbContext = JAXBContext.newInstance(MyProperties.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			jaxbMarshaller.marshal(this, new File("properties.xml"));
+		} catch (JAXBException e)
+		{
+
+		}
+	}
 
 }

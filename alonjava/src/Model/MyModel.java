@@ -1,17 +1,14 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.Observable;
 
+import Algorithm.SearchDomain;
 import clientServer.Client;
 import clientServer.MyProperties;
-import Algorithm.Action;
-import Algorithm.SearchDomain;
-import Algorithm.Searcher;
 
 public class MyModel extends Observable implements Model {
 	
-	private String domain;
+	private static SearchDomain domain;
 	private String algorithm;
 	private SearchAlgorithmsFactory algorithmsFactory;
 	private Solution solution;
@@ -29,7 +26,7 @@ public class MyModel extends Observable implements Model {
 		String[] arr = args.split(":");
 		String domainName = arr[0];
 		String domainArgs = arr[1];
-		domain = args;
+		domain = (DomainFactory.createDomain(domainName,domainArgs));
 	}
 	
 	@Override
@@ -46,7 +43,7 @@ public class MyModel extends Observable implements Model {
 				{
 					MyProperties m = new MyProperties();
 					Client client = new Client();
-					solution = client.getSolution(domain, algorithm, m.ip, m.port);
+					solution = client.getSolution(getDomain(), algorithm, m.ip, m.port);
 					
 //					Moved to server.
 //					
@@ -94,4 +91,13 @@ public class MyModel extends Observable implements Model {
 		return !calculating;
 	}
 
+	public static SearchDomain getDomain() {
+		return domain;
+	}
+
+
+	@Override
+	public void setDomain(SearchDomain domain) {
+		this.domain = domain;
+	}
 }

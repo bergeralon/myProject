@@ -10,7 +10,7 @@ import Model.Solution;
 
 public class Client {
 	
-	public Solution getSolution(String domain, String algo, String ip, int port) {		
+	public Solution getSolution(SearchDomain domain, String algo, String ip, int port) {		
 		Socket socket = null;
 		ObjectInputStream in = null;
 		ObjectOutputStream out = null;

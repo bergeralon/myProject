@@ -27,16 +27,16 @@ public class ClientHandler implements Runnable {
 			in = new ObjectInputStream(socket.getInputStream());
 			out = new ObjectOutputStream(socket.getOutputStream());
 			
-			String domain = (String)in.readObject();
+			SearchDomain domain = (SearchDomain)in.readObject();
 			System.out.println("Got new problem: " + domain);
 			String algo = (String)in.readObject();
 			
 			Model model = new MyModel();
-			model.selectDomain(domain);
+			model.setDomain(domain);
 			model.selectAlgorithm(algo);
 			model.solveDomain();
 			Solution solution = model.getSolution();
-			solution.setFirstState(model.getDomain().printDomain());
+			solution.setFirstState(MyModel.getDomain().printDomain());
 			
 			out.writeObject(solution);			
 			

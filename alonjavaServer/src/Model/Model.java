@@ -9,5 +9,5 @@ public interface Model {
 	Solution getSolution();
 	void printCurrentState();
 	boolean isCalculated();	
-	SearchDomain getDomain();
+	void setDomain(SearchDomain domain);
 }

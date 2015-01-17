@@ -1,6 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<myProperties>
-	<program_name>Alon's Program</program_name>
-	<ip>127.0.0.1</ip>
-	<port>12345</port>
-</myProperties>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><myProperties><program_name>Alon's very cool Program</program_name><ip>127.0.0.1</ip><port>12345</port></myProperties>

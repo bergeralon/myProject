@@ -9,7 +9,7 @@ import Algorithm.Searcher;
 
 public class MyModel extends Observable implements Model {
 	
-	private SearchDomain domain;
+	private static SearchDomain domain;
 	private Searcher algorithm;
 	private SearchAlgorithmsFactory algorithmsFactory;
 	private Solution solution;
@@ -88,10 +88,14 @@ public class MyModel extends Observable implements Model {
 		return !calculating;
 	}
 
-	@Override
-	public SearchDomain getDomain()
-	{
+	public static SearchDomain getDomain() {
 		return domain;
+	}
+
+
+	@Override
+	public void setDomain(SearchDomain domain) {
+		this.domain = domain;
 	}
 
 }
