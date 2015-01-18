@@ -6,9 +6,14 @@ import java.util.PriorityQueue;
 import Algorithm.Action;
 import Algorithm.State;
 
+/**
+ * 
+place all common things to all searchers here
+ *
+ */
+
 public abstract class CommonSearcher implements Searcher  {
 		
-	// place all common things to all searchers here
 	protected PriorityQueue<State> openList = new PriorityQueue<State>();
 	protected PriorityQueue<State> closedList = new PriorityQueue<State>();
 	

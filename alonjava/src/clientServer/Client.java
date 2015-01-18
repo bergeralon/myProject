@@ -8,6 +8,8 @@ import java.net.Socket;
 import Algorithm.SearchDomain;
 import Model.Solution;
 
+
+
 public class Client {
 	
 	public Solution getSolution(SearchDomain domain, String algo, String ip, int port) {		

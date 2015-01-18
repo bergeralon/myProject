@@ -3,6 +3,21 @@ package Algorithm;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * 
+ * uses a best-first search and finds a least-cost path 
+ * from a given initial node to one goal node (out of one or more possible goals). 
+ * As A* traverses the graph, it follows a path of the lowest expected total cost or distance, 
+ * keeping a sorted priority queue of alternate path segments along the way.
+
+	It uses a knowledge-plus-heuristic cost function of node x (usually denoted f(x)) to 
+	determine the order in which the search visits nodes in the tree. The cost function is a sum of two functions:
+
+	the past path-cost function, which is the known distance from the starting node to the current node x (usually denoted g(x))
+	a future path-cost function, which is an admissible "heuristic estimate" of the distance from x to the goal (usually denoted h(x)).
+ *
+ */
+
 public class AStar extends CommonSearcher {
 
 	@Override

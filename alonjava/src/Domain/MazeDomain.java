@@ -8,6 +8,13 @@ import Algorithm.Action;
 import Algorithm.SearchDomain;
 import Algorithm.State;
 
+/**
+ * 
+ * Implementations of functions that define the maze's layout,
+ * possible moves and states.
+ *
+ */
+
 public class MazeDomain implements SearchDomain, Serializable {
 	
 	private MazeState[][] myMaze;

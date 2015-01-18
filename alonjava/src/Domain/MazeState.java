@@ -2,6 +2,13 @@ package Domain;
 
 import Algorithm.State;
 
+/**
+ * this  class defines each state in this domain and checks for walls.
+ * @author bergeral
+ *
+ */
+
+
 public class MazeState extends State {
 
 	private int i,j;

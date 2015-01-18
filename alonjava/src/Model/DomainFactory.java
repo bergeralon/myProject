@@ -13,6 +13,13 @@ import Algorithm.Action;
 import Algorithm.SearchDomain;
 import Domain.MazeDomain;
 
+/**
+ * here we have the settings for choosing the desired domain from the command line.
+ * In addition, we have a saving solution to a file method as well as a read solution from file method.
+ * @author bergeral
+ *
+ */
+
 public class DomainFactory {
 
 	public static SearchDomain createDomain(String domainName, String domainArgs) {

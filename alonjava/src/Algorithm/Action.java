@@ -2,6 +2,11 @@ package Algorithm;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * Defines each action's description and price.
+ *
+ */
 
 public class Action implements Serializable{
 

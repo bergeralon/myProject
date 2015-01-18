@@ -2,7 +2,11 @@ package Algorithm;
 
 import java.io.Serializable;
 
-
+/**
+ * this class contains each state's relevant values to be consider while running the desired search algorithm on the selected domain.
+ * @author bergeral
+ *
+ */
 
 public abstract class State implements Comparable<State>, Serializable {
 
@@ -17,7 +21,7 @@ public abstract class State implements Comparable<State>, Serializable {
 		this.state=state;
 		this.cameFrom = null;
 		this.cameWithAction = null;
-		//TODO: all other fields with null
+		
 	}
 	public State getCameFrom() {
 		return cameFrom;

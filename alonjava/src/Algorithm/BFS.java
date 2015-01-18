@@ -3,6 +3,18 @@ package Algorithm;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * The algorithm uses a queue data structure to store intermediate results as it traverses the graph, as follows:
+
+-> Enqueue the root node
+-> Dequeue a node and examine it
+-> If the element sought is found in this node, quit the search and return a result.
+-> Otherwise enqueue any successors (the direct child nodes) that have not yet been discovered.
+-> If the queue is empty, every node on the graph has been examined – quit the search and return "not found".
+-> If the queue is not empty, repeat from Step 2.
+ *
+ */
+
 public class BFS extends CommonSearcher {
 
 	@Override

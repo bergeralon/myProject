@@ -10,6 +10,13 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * this class contains the ip and port number we will use to connect the server.
+ * these settings will be saved in a XML file.
+ * @author bergeral
+ *
+ */
+
 @XmlRootElement
 public class MyProperties implements Serializable
 {
