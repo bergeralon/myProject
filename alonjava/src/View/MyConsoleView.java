@@ -37,12 +37,12 @@ public class MyConsoleView extends Observable implements View {
 
 		final Shell shell = new Shell(display);
 		
-//		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
-//        dialog.setText("Select domain");
-//        dialog.open();
+		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
+        dialog.setText("Select domain");
+        dialog.open();
         
-        int size = 10;//new NumberInputDialog(shell).open("Please enter the size of the maze:");
-        int walls = 50;//new NumberInputDialog(shell).open("Please enter number of walls:");
+        int size = new NumberInputDialog(shell).open("Please enter the size of the maze:");
+        int walls = new NumberInputDialog(shell).open("Please enter number of walls:");
 		action = "SelectDomain Maze:" + size+","+size+","+walls;
 		this.setChanged();
 		this.notifyObservers();
