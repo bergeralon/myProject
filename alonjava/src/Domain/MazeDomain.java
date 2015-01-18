@@ -32,6 +32,7 @@ public class MazeDomain implements SearchDomain, Serializable {
 				getMaze()[i][j] = new MazeState(i, j);
 		
 		initWalls(w);
+		getMaze()[0][0].setFigure(true);
 
 	}
 	public String printDomain(){
@@ -46,6 +47,8 @@ public class MazeDomain implements SearchDomain, Serializable {
 				
 				if(getMaze()[i][j].getIsWall() == true)
 					result += " [x] ";
+				else if(getMaze()[i][j].isFigure() == true)
+					result += " [o] ";
 				else result += " [ ] ";
 			}
 			result += "\n";
@@ -86,7 +89,7 @@ public class MazeDomain implements SearchDomain, Serializable {
 	
 	@Override
 	public State getStartState() {
-		MazeState start = getMaze()[0][0];
+		MazeState start = getFigureState();
 		start.setPrice(0);	
 		start.setfScore(rowsNum+colsNum-2);	// Manhatten distance
 		return start;
@@ -159,6 +162,17 @@ public class MazeDomain implements SearchDomain, Serializable {
 	}
 	public MazeState[][] getMaze() {
 		return myMaze;
+	}
+	
+	public MazeState getFigureState()
+	{
+		for (int i = 0; i < rowsNum; i++) {
+			for (int j = 0; j < colsNum; j++) {
+				if(myMaze[i][j].isFigure())
+					return myMaze[i][j];
+			}
+		}
+		return null;
 	}
 
 }

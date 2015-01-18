@@ -8,6 +8,13 @@ import Algorithm.Action;
 import Algorithm.SearchDomain;
 import Algorithm.State;
 
+/**
+ * 
+ * Implementations of functions that define the maze's layout,
+ * possible moves and states.
+ *
+ */
+
 public class MazeDomain implements SearchDomain, Serializable {
 	
 	private MazeState[][] myMaze;
@@ -22,9 +29,10 @@ public class MazeDomain implements SearchDomain, Serializable {
 		
 		for(int i = 0; i<r; i++)
 			for(int j=0; j<c; j++)
-				myMaze[i][j] = new MazeState(i, j);
+				getMaze()[i][j] = new MazeState(i, j);
 		
 		initWalls(w);
+		getMaze()[0][0].setFigure(true);
 
 	}
 	public String printDomain(){
@@ -37,8 +45,10 @@ public class MazeDomain implements SearchDomain, Serializable {
 		for (int i = 0; i < rowsNum; i++) {
 			for (int j = 0; j < colsNum; j++) {
 				
-				if(myMaze[i][j].getIsWall() == true)
+				if(getMaze()[i][j].getIsWall() == true)
 					result += " [x] ";
+				else if(getMaze()[i][j].isFigure() == true)
+					result += " [o] ";
 				else result += " [ ] ";
 			}
 			result += "\n";
@@ -71,15 +81,15 @@ public class MazeDomain implements SearchDomain, Serializable {
 			temp_i = rand.nextInt(rowsNum);
 			temp_j = rand.nextInt(colsNum);
 			
-			if(!myMaze[temp_i][temp_j].getIsWall() && !(temp_i == 0 && temp_j == 0) && !(temp_i == rowsNum-1 && temp_j == colsNum-1))
-				myMaze[temp_i][temp_j].setIsWall(true);
+			if(!getMaze()[temp_i][temp_j].getIsWall() && !(temp_i == 0 && temp_j == 0) && !(temp_i == rowsNum-1 && temp_j == colsNum-1))
+				getMaze()[temp_i][temp_j].setIsWall(true);
 		}
 	}	
 }
 	
 	@Override
 	public State getStartState() {
-		MazeState start = myMaze[0][0];
+		MazeState start = getFigureState();
 		start.setPrice(0);	
 		start.setfScore(rowsNum+colsNum-2);	// Manhatten distance
 		return start;
@@ -87,7 +97,7 @@ public class MazeDomain implements SearchDomain, Serializable {
 
 	@Override
 	public MazeState getGoalState() {
-		return myMaze[rowsNum-1][colsNum-1];
+		return getMaze()[rowsNum-1][colsNum-1];
 	}
 
 	@Override
@@ -100,37 +110,37 @@ public class MazeDomain implements SearchDomain, Serializable {
 				// all actions :
 			
 				// right action
-				if((curr.getJ()+1 < colsNum) && (!myMaze[curr.getI()][curr.getJ()+1].getIsWall()))
+				if((curr.getJ()+1 < colsNum) && (!getMaze()[curr.getI()][curr.getJ()+1].getIsWall()))
 					{
 						Action a = new Action("right");
-						MazeState nextState = myMaze[curr.getI()][curr.getJ()+1];
+						MazeState nextState = getMaze()[curr.getI()][curr.getJ()+1];
 //						
 						myMap.put(a, nextState);
 					}
 					
 				// left action
-				if((curr.getJ()-1 >= 0) && (!myMaze[curr.getI()][curr.getJ()-1].getIsWall()))
+				if((curr.getJ()-1 >= 0) && (!getMaze()[curr.getI()][curr.getJ()-1].getIsWall()))
 					{
 						Action a = new Action("left");
-						MazeState nextState = myMaze[curr.getI()][curr.getJ() - 1];
+						MazeState nextState = getMaze()[curr.getI()][curr.getJ() - 1];
 						
 						myMap.put(a, nextState);
 					}
 					
 				// up action
-				if((curr.getI()-1 >= 0) && (!myMaze[curr.getI()-1][curr.getJ()].getIsWall()))
+				if((curr.getI()-1 >= 0) && (!getMaze()[curr.getI()-1][curr.getJ()].getIsWall()))
 					{
 						Action a = new Action("up");
-						MazeState nextState = myMaze[curr.getI()-1][curr.getJ()];
+						MazeState nextState = getMaze()[curr.getI()-1][curr.getJ()];
 						
 						myMap.put(a, nextState);
 					}
 			
 				// down action
-				if((curr.getI()+1 < rowsNum) && (!myMaze[curr.getI()+1][curr.getJ()].getIsWall()))
+				if((curr.getI()+1 < rowsNum) && (!getMaze()[curr.getI()+1][curr.getJ()].getIsWall()))
 					{
 						Action a = new Action("down");
-						MazeState nextState = myMaze[curr.getI()+1][curr.getJ()];
+						MazeState nextState = getMaze()[curr.getI()+1][curr.getJ()];
 
 						myMap.put(a, nextState);
 					}
@@ -145,10 +155,24 @@ public class MazeDomain implements SearchDomain, Serializable {
 		{
 			for (int j = 0; j < colsNum; j++)
 			{
-				sb.append(myMaze[i][j].toString());
+				sb.append(getMaze()[i][j].toString());
 			}
 		}
 		return sb.toString();
+	}
+	public MazeState[][] getMaze() {
+		return myMaze;
+	}
+	
+	public MazeState getFigureState()
+	{
+		for (int i = 0; i < rowsNum; i++) {
+			for (int j = 0; j < colsNum; j++) {
+				if(myMaze[i][j].isFigure())
+					return myMaze[i][j];
+			}
+		}
+		return null;
 	}
 
 }

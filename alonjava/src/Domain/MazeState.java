@@ -13,6 +13,7 @@ public class MazeState extends State {
 
 	private int i,j;
 	private boolean isWall;
+	private boolean isFigure;
 	
 	public MazeState(int i, int j) {
 	
@@ -59,4 +60,16 @@ public class MazeState extends State {
 		MazeState goal1 = (MazeState)goal;
 		return (goal1.getJ() - this.j) +  (goal1.getI() - this.i);	// Manhatten distance
 	}
+
+	public boolean isFigure()
+	{
+		return isFigure;
+	}
+
+	public void setFigure(boolean isFigure)
+	{
+		this.isFigure = isFigure;
+	}
+	
+	
 }

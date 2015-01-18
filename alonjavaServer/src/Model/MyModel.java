@@ -41,7 +41,7 @@ public class MyModel extends Observable implements Model {
 		if (sol == null)
 		{
 			calculating = true;
-			sleepSomeTime();
+//			sleepSomeTime();
 			long startTime = System.currentTimeMillis();
 			ArrayList<Action> actions = algorithm.search(domain);
 			long endTime = System.currentTimeMillis();
