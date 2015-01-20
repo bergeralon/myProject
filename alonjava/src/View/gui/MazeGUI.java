@@ -249,6 +249,8 @@ public class MazeGUI extends Canvas {
 		{
 			if (x == buttons[0].length - 1 && y == buttons.length - 1)
 				break;
+			if (a == null)
+				continue;
 			if (a.toString().equals("right"))
 				x++;
 			if (a.toString().equals("left"))
