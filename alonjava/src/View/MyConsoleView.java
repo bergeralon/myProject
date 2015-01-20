@@ -42,9 +42,9 @@ public class MyConsoleView extends Observable implements View
 		Display display = new Display();
 
 
-		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
-		dialog.setText("Select domain");
-		dialog.open();
+//		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
+//		dialog.setText("Select domain");
+//		dialog.open();
 
 
 		while (true)
@@ -53,10 +53,13 @@ public class MyConsoleView extends Observable implements View
 			shell.setSize(530, 610);
 			shell.setText(m.program_name);
 			addMenu(shell);
-			size = new NumberInputDialog(shell)
-					.open("Please enter the size of the maze:");
-			walls = new NumberInputDialog(shell)
-					.open("Please enter number of walls:");
+//			size = new NumberInputDialog(shell)
+//					.open("Please enter the size of the maze:");
+//			walls = new NumberInputDialog(shell)
+//					.open("Please enter number of walls:");
+			size = 12	;
+			walls = 50;
+		
 			action = "SelectDomain Maze:" + size + "," + size + "," + walls;
 			this.setChanged();
 			this.notifyObservers();
@@ -78,7 +81,7 @@ public class MyConsoleView extends Observable implements View
 				public void drawGoal(Composite comp)
 				{
 					Label label = new Label(comp, SWT.BORDER);
-					Image image = new Image(comp.getDisplay(), "lib/door.png");
+					Image image = new Image(comp.getDisplay(), "lib/pizza.png");
 					label.setImage(image);
 					label.setBounds(0, 0, comp.getSize().x, comp.getSize().y);
 				}
@@ -94,7 +97,7 @@ public class MyConsoleView extends Observable implements View
 			}
 			MessageBox messageBox = new MessageBox(new Shell(display), SWT.ICON_QUESTION
 					| SWT.YES | SWT.NO);
-			messageBox.setMessage("Do you want to restart?");
+			messageBox.setMessage("New Game?");
 			messageBox.setText("Exiting Application");
 			int response = messageBox.open();
 			if (response == SWT.NO)
@@ -161,8 +164,8 @@ public class MyConsoleView extends Observable implements View
 				{
 					MessageBox messageBox = new MessageBox(gui.getShell(),
 							SWT.ICON_ERROR);
-					messageBox.setMessage("No solution found...");
-					messageBox.setText("Sorry");
+					messageBox.setMessage("Pizza Is Unreachable...");
+					messageBox.setText("Sorry...");
 					messageBox.open();
 				}
 				for (Action a : solution.getActions())
@@ -184,7 +187,7 @@ public class MyConsoleView extends Observable implements View
 		System.out.println(msg);
 	}
 
-	public void solveWithASter()
+	public void solveWithAStar()
 	{
 		action = "SelectAlgorithm AStar";
 		this.setChanged();

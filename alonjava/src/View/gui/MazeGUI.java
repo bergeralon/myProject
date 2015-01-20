@@ -104,7 +104,7 @@ public class MazeGUI extends Canvas {
 			@Override
 			public void widgetSelected(SelectionEvent arg0)
 			{
-				view.solveWithASter();
+				view.solveWithAStar();
 			}
 			
 			@Override
@@ -224,8 +224,8 @@ public class MazeGUI extends Canvas {
 	{
 		MessageBox messageBox = new MessageBox(figure.getShell(),
 				SWT.ICON_INFORMATION);
-		messageBox.setMessage("You won the maze!");
-		messageBox.setText("Success");
+		messageBox.setMessage("Pizza Found :)");
+		messageBox.setText("Great Success!");
 		messageBox.open();
 		figure.getShell().close();
 	}
@@ -259,7 +259,7 @@ public class MazeGUI extends Canvas {
 				y--;
 			try
 			{
-				buttons[y][x].setImage(new Image(buttons[y][x].getDisplay(), "lib/footsteps.png"));
+				buttons[y][x].setImage(new Image(buttons[y][x].getDisplay(), "lib/foot_steps_feet.png"));
 				
 			} catch (Exception e)
 			{
