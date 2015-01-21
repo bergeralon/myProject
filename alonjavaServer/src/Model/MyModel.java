@@ -55,7 +55,7 @@ public class MyModel extends Observable implements Model {
 		}
 		else
 		{
-			System.out.println("Found cached solution!");
+			System.out.println("\n* FOUND CACHED SOLUTION!");
 			solution = sol;
 			this.setChanged();
 			this.notifyObservers();

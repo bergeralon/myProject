@@ -21,7 +21,7 @@ public class SearchAlgorithmsFactory {
 		AlgorithmCreator creator = algorithms.get(algorithmName);
 		Searcher searcher = null;
 		if (creator != null)  {
-			System.out.println("creating algo name: "+algorithmName);
+			System.out.println("\n* Creating algo name: "+algorithmName);
 			searcher = creator.create();			
 		}
 		else

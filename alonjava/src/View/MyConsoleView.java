@@ -42,9 +42,9 @@ public class MyConsoleView extends Observable implements View
 		Display display = new Display();
 
 
-//		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
-//		dialog.setText("Select domain");
-//		dialog.open();
+		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
+		dialog.setText("Select domain");
+		dialog.open();
 
 
 		while (true)
@@ -53,14 +53,15 @@ public class MyConsoleView extends Observable implements View
 			shell.setSize(530, 610);
 			shell.setText(m.program_name);
 			addMenu(shell);
-//			size = new NumberInputDialog(shell)
-//					.open("Please enter the size of the maze:");
-//			walls = new NumberInputDialog(shell)
-//					.open("Please enter number of walls:");
-			size = 12	;
-			walls = 50;
+			size = new NumberInputDialog(shell)
+					.open("Please enter the size of the maze:");
+			walls = new NumberInputDialog(shell)
+					.open("Please enter number of walls:");
+//			size = 11	;
+//			walls = 30;
 		
 			action = "SelectDomain Maze:" + size + "," + size + "," + walls;
+			
 			this.setChanged();
 			this.notifyObservers();
 

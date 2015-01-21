@@ -28,7 +28,7 @@ public class ClientHandler implements Runnable {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			
 			SearchDomain domain = (SearchDomain)in.readObject();
-			System.out.println("Got new problem: " + domain);
+			System.out.println("\n * Got new problem: " + domain);
 			String algo = (String)in.readObject();
 			
 			Model model = new MyModel();

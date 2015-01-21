@@ -31,16 +31,16 @@ public class MyTCPIPServer {
 				while(!Thread.interrupted()) {
 					try {
 						Socket socket = server.accept();
-						System.out.println("Got new connection");
+						System.out.println("\n* Got new connection");
 						
 						if (socket != null) {
 							ClientHandler handler = new ClientHandler(socket);
 							executor.submit(handler);
 						}
-						System.out.println("Finished executing");
+						System.out.println("\n* Finished executing");
 						
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}	catch (Exception e) {
 						

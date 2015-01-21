@@ -27,8 +27,9 @@ public class Presenter implements Observer {
 		if (observable == model)
 		{
 			Solution solution = model.getSolution();
-			System.out.println("Got Answer");
+			System.out.println("\nGot an answer : \n");
 			model.printCurrentState();
+			System.out.println("Steps to take : \n ");
 			view.displaySolution(solution);
 		}
 		else if (observable == view)
