@@ -15,6 +15,12 @@ import org.eclipse.swt.widgets.Text;
 
 import clientServer.MyProperties;
 
+/**
+ * here we made a GUI for editing program name, ip and port number.
+ * @author Alon
+ *
+ */
+
 public class PropertiesShell {
 
 	public static void open(Display display) {

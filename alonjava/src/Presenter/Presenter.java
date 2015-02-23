@@ -10,6 +10,12 @@ import Model.Solution;
 import View.MyConsoleView;
 import View.View;
 
+/**
+ * this class gets updates and results from the 'model' class and notifies the 'view' class to show those updates. 
+ * @author Alon
+ *
+ */
+
 public class Presenter implements Observer {
 	private Model model;
 	private View view;

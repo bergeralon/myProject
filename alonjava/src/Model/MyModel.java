@@ -6,6 +6,12 @@ import Algorithm.SearchDomain;
 import clientServer.Client;
 import clientServer.MyProperties;
 
+/**
+ * implementations of functions declared in 'model' class.
+ * @author Alon
+ *
+ */
+
 public class MyModel extends Observable implements Model {
 	
 	private static SearchDomain domain;

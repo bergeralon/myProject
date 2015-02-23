@@ -16,6 +16,12 @@ import View.MyConsoleView;
 import Algorithm.Action;
 import Domain.MazeDomain;
 
+/**
+ * all GUI settings including figure movement are here.
+ * @author Alon
+ *
+ */
+
 public class MazeGUI extends Canvas {
 
 	private static int size;
@@ -261,7 +267,7 @@ public class MazeGUI extends Canvas {
 				y--;
 			try
 			{
-				buttons[y][x].setImage(new Image(buttons[y][x].getDisplay(), "lib/foot_steps_feet.png"));
+				buttons[y][x].setImage(new Image(buttons[y][x].getDisplay(), "lib/dot20.png"));
 				
 			} catch (Exception e)
 			{

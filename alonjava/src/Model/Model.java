@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * this class holds most of our program's information as well as calculation.
+ * the model class gets the information he needs from the user through the presenter (the "middle man").
+ */
+
 import Algorithm.SearchDomain;
 
 public interface Model {

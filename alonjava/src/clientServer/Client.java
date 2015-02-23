@@ -8,7 +8,11 @@ import java.net.Socket;
 import Algorithm.SearchDomain;
 import Model.Solution;
 
-
+/**
+ * 
+ * @author Alon
+ *
+ */
 
 public class Client {
 	

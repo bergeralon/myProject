@@ -25,6 +25,12 @@ import View.gui.NumberInputDialog;
 import View.gui.PropertiesShell;
 import clientServer.MyProperties;
 
+/**
+ * GUI settings of the board according the user's selections.
+ * @author Alon
+ *
+ */
+
 public class MyConsoleView extends Observable implements View
 {
 
@@ -42,9 +48,9 @@ public class MyConsoleView extends Observable implements View
 		Display display = new Display();
 
 
-		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
-		dialog.setText("Select domain");
-		dialog.open();
+//		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
+//		dialog.setText("Select domain");
+//		dialog.open();
 
 
 		while (true)
@@ -53,12 +59,14 @@ public class MyConsoleView extends Observable implements View
 			shell.setSize(530, 610);
 			shell.setText(m.program_name);
 			addMenu(shell);
-			size = new NumberInputDialog(shell)
-					.open("Please enter the size of the maze:");
-			walls = new NumberInputDialog(shell)
-					.open("Please enter number of walls:");
-//			size = 11	;
-//			walls = 30;
+			
+//			size = new NumberInputDialog(shell)
+//					.open("Please enter the size of the maze:");
+//			walls = new NumberInputDialog(shell)
+//					.open("Please enter number of walls:");
+			
+			size = 15;
+			walls = 80;
 		
 			action = "SelectDomain Maze:" + size + "," + size + "," + walls;
 			
@@ -73,7 +81,7 @@ public class MyConsoleView extends Observable implements View
 				public void drawFigure(Composite comp)
 				{
 					Label label = new Label(comp, SWT.BORDER);
-					Image image = new Image(comp.getDisplay(), "lib/figure.png");
+					Image image = new Image(comp.getDisplay(), "lib/figure32.png");
 					label.setImage(image);
 					label.setBounds(0, 0, comp.getSize().x, comp.getSize().y);
 				}
@@ -82,7 +90,7 @@ public class MyConsoleView extends Observable implements View
 				public void drawGoal(Composite comp)
 				{
 					Label label = new Label(comp, SWT.BORDER);
-					Image image = new Image(comp.getDisplay(), "lib/pizza.png");
+					Image image = new Image(comp.getDisplay(), "lib/pizza32.png");
 					label.setImage(image);
 					label.setBounds(0, 0, comp.getSize().x, comp.getSize().y);
 				}

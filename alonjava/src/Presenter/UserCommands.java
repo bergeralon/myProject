@@ -5,6 +5,12 @@ import java.util.HashMap;
 import Model.Model;
 import View.View;
 
+/**
+ * here we defined the desired type in commands from the user for choosing his game settings.
+ * @author Alon
+ *
+ */
+
 public class UserCommands {
 
 	private HashMap<String, Command> commands = 

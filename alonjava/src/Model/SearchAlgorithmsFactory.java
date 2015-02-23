@@ -6,6 +6,12 @@ import Algorithm.AStar;
 import Algorithm.BFS;
 import Algorithm.Searcher;
 
+/**
+ * here we summon the desired algorithm
+ * @author Alon
+ *
+ */
+
 public class SearchAlgorithmsFactory {
 	private HashMap<String, AlgorithmCreator> algorithms;
 	
@@ -21,7 +27,7 @@ public class SearchAlgorithmsFactory {
 		AlgorithmCreator creator = algorithms.get(algorithmName);
 		Searcher searcher = null;
 		if (creator != null)  {
-			System.out.println("\n* Creating algo name: "+algorithmName);
+			System.out.println("\n* Calculating with: "+algorithmName+" algorithm");
 			searcher = creator.create();			
 		}
 		else

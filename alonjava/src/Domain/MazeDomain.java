@@ -83,8 +83,8 @@ public class MazeDomain implements SearchDomain, Serializable {
 			
 			if(!getMaze()[temp_i][temp_j].getIsWall() && !(temp_i == 0 && temp_j == 0) && 
 					!(temp_i == 1 && temp_j == 0) && !(temp_i == 0 && temp_j == 1) && 
-						!(temp_i == rowsNum-2 && temp_j == colsNum-2) &&
-							!(temp_i == rowsNum-1 && temp_j == colsNum-1))getMaze()[temp_i][temp_j].setIsWall(true);
+						!(temp_i == rowsNum-2 && temp_j == colsNum-2) && !(temp_i == rowsNum-2 && temp_j == colsNum-1) &&
+						!(temp_i == rowsNum-1 && temp_j == colsNum-2) && !(temp_i == rowsNum-1 && temp_j == colsNum-1))getMaze()[temp_i][temp_j].setIsWall(true);
 		}
 	}	
 }
