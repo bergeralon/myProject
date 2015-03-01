@@ -1,9 +1,20 @@
 package View;
 
+import hagana.view.GameBoard;
+
+import java.awt.BorderLayout;
 import java.util.Observable;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -27,12 +38,12 @@ import clientServer.MyProperties;
 
 /**
  * GUI settings of the board according the user's selections.
+ * 
  * @author Alon
  *
  */
 
-public class MyConsoleView extends Observable implements View
-{
+public class MyConsoleView extends Observable implements View {
 
 	private String action;
 	private MazeGUI gui;
@@ -41,71 +52,111 @@ public class MyConsoleView extends Observable implements View
 	boolean more = true;
 
 	@Override
-	public void start()
-	{
+	public void start() {
 		MyProperties m = new MyProperties();
 
 		Display display = new Display();
 
+		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
+		dialog.setText("Select domain");
+		dialog.open();
+		String selection = dialog.getSelection();
 
-//		DomainSelectionDialog dialog = new DomainSelectionDialog(new Shell());
-//		dialog.setText("Select domain");
-//		dialog.open();
-
-
-		while (true)
-		{
+		while (true) {
 			final Shell shell = new Shell(display);
 			shell.setSize(530, 610);
 			shell.setText(m.program_name);
 			addMenu(shell);
-			
-//			size = new NumberInputDialog(shell)
-//					.open("Please enter the size of the maze:");
-//			walls = new NumberInputDialog(shell)
-//					.open("Please enter number of walls:");
-			
-			size = 15;
-			walls = 80;
-		
-			action = "SelectDomain Maze:" + size + "," + size + "," + walls;
-			
-			this.setChanged();
-			this.notifyObservers();
 
-			MazeDomain domain = (MazeDomain) MyModel.getDomain();
-			gui = new MazeGUI(shell, domain, 505, 535, new FigureDrawer()
-			{
+			if (selection.equals(DomainSelectionDialog.MAZE)) {
+				size = new NumberInputDialog(shell)
+						.open("Please enter the size of the maze:");
+				walls = new NumberInputDialog(shell)
+						.open("Please enter number of walls:");
 
-				@Override
-				public void drawFigure(Composite comp)
+				size = 15;
+				walls = 80;
+
+				action = "SelectDomain Maze:" + size + "," + size + "," + walls;
+
+				this.setChanged();
+				this.notifyObservers();
+
+				MazeDomain domain = (MazeDomain) MyModel.getDomain();
+				gui = new MazeGUI(shell, domain, 505, 535, new FigureDrawer() {
+
+					@Override
+					public void drawFigure(Composite comp) {
+						Label label = new Label(comp, SWT.BORDER);
+						Image image = new Image(comp.getDisplay(),
+								"lib/figure32.png");
+						label.setImage(image);
+						label.setBounds(0, 0, comp.getSize().x,
+								comp.getSize().y);
+					}
+
+					@Override
+					public void drawGoal(Composite comp) {
+						Label label = new Label(comp, SWT.BORDER);
+						Image image = new Image(comp.getDisplay(),
+								"lib/pizza32.png");
+						label.setImage(image);
+						label.setBounds(0, 0, comp.getSize().x,
+								comp.getSize().y);
+					}
+				}, this);
+				gui.setBounds(5, 5, 505, 505);
+			} else {
+				
+				
+				shell.setLayout(new FillLayout());
+
+				Composite main = new Composite(shell, SWT.BORDER);
+
+				int rows = 8;
+				int cols = 8;
+				int startRowBlue = 2;
+				int startColBlue = 3;
+				GameBoard board = new GameBoard(main, SWT.BORDER, rows, cols);
+				board.placeBlue(startRowBlue, startColBlue);
+				board.setBounds(5, 5, 505, 400);
+				
+				action = "SelectDomain Hagana:" + rows + "," + cols + ":" +
+				startRowBlue + "," + startColBlue + ":" +
+				board.getRedRow() + "," + board.getRedCol();
+				
+				this.setChanged();
+				this.notifyObservers();
+				
+				Button solveButton = new Button(main, SWT.BORDER);
+
+				solveButton.setText("Solve!");
+				solveButton.setBounds(505/2-100, 505 + 10 , 90, 30);
+				solveButton.addSelectionListener(new SelectionListener()
 				{
-					Label label = new Label(comp, SWT.BORDER);
-					Image image = new Image(comp.getDisplay(), "lib/figure32.png");
-					label.setImage(image);
-					label.setBounds(0, 0, comp.getSize().x, comp.getSize().y);
-				}
+					
+					@Override
+					public void widgetSelected(SelectionEvent arg0)
+					{
+						MyConsoleView.this.solveWithAStar();
+					}
+					
+					@Override
+					public void widgetDefaultSelected(SelectionEvent arg0)
+					{
+					}
+				});
 
-				@Override
-				public void drawGoal(Composite comp)
-				{
-					Label label = new Label(comp, SWT.BORDER);
-					Image image = new Image(comp.getDisplay(), "lib/pizza32.png");
-					label.setImage(image);
-					label.setBounds(0, 0, comp.getSize().x, comp.getSize().y);
-				}
-			}, this);
-			gui.setBounds(5, 5, 505, 505);
+			}
 
 			shell.open();
 
-			while (!shell.isDisposed())
-			{
+			while (!shell.isDisposed()) {
 				if (!display.readAndDispatch())
 					display.sleep();
 			}
-			MessageBox messageBox = new MessageBox(new Shell(display), SWT.ICON_QUESTION
-					| SWT.YES | SWT.NO);
+			MessageBox messageBox = new MessageBox(new Shell(display),
+					SWT.ICON_QUESTION | SWT.YES | SWT.NO);
 			messageBox.setMessage("New Game?");
 			messageBox.setText("Exiting Application");
 			int response = messageBox.open();
@@ -113,14 +164,14 @@ public class MyConsoleView extends Observable implements View
 				more = false;
 			if (!more)
 				break;
+
 		}
 
 		display.dispose();
 
 	}
 
-	private void addMenu(final Shell shell)
-	{
+	private void addMenu(final Shell shell) {
 		Menu bar = new Menu(shell, SWT.BAR);
 		shell.setMenuBar(bar);
 
@@ -131,11 +182,9 @@ public class MyConsoleView extends Observable implements View
 		fileItem.setMenu(submenu);
 
 		MenuItem propertiesItem = new MenuItem(submenu, SWT.PUSH);
-		propertiesItem.addListener(SWT.Selection, new Listener()
-		{
+		propertiesItem.addListener(SWT.Selection, new Listener() {
 			@Override
-			public void handleEvent(Event e)
-			{
+			public void handleEvent(Event e) {
 				PropertiesShell.open(shell.getDisplay());
 				shell.setText(new MyProperties().program_name);
 			}
@@ -143,11 +192,9 @@ public class MyConsoleView extends Observable implements View
 		propertiesItem.setText("Show properties");
 
 		MenuItem item = new MenuItem(submenu, SWT.PUSH);
-		item.addListener(SWT.Selection, new Listener()
-		{
+		item.addListener(SWT.Selection, new Listener() {
 			@Override
-			public void handleEvent(Event e)
-			{
+			public void handleEvent(Event e) {
 				shell.close();
 			}
 		});
@@ -155,22 +202,17 @@ public class MyConsoleView extends Observable implements View
 	}
 
 	@Override
-	public void displayCurrentState()
-	{
+	public void displayCurrentState() {
 		System.out.println("This is the current view:");
 
 	}
 
 	@Override
-	public void displaySolution(final Solution solution)
-	{
-		Display.getDefault().asyncExec(new Runnable()
-		{
+	public void displaySolution(final Solution solution) {
+		Display.getDefault().asyncExec(new Runnable() {
 			@Override
-			public void run()
-			{
-				if (solution == null || solution.getActions().size() < 1)
-				{
+			public void run() {
+				if (solution == null || solution.getActions().size() < 1) {
 					MessageBox messageBox = new MessageBox(gui.getShell(),
 							SWT.ICON_ERROR);
 					messageBox.setMessage("Pizza Is Unreachable...");
@@ -185,19 +227,16 @@ public class MyConsoleView extends Observable implements View
 	}
 
 	@Override
-	public String getUserAction()
-	{
+	public String getUserAction() {
 		return action;
 	}
 
 	@Override
-	public void showMessage(String msg)
-	{
+	public void showMessage(String msg) {
 		System.out.println(msg);
 	}
 
-	public void solveWithAStar()
-	{
+	public void solveWithAStar() {
 		action = "SelectAlgorithm AStar";
 		this.setChanged();
 		this.notifyObservers();
@@ -206,8 +245,7 @@ public class MyConsoleView extends Observable implements View
 		this.notifyObservers();
 	}
 
-	public void solveWithBFS()
-	{
+	public void solveWithBFS() {
 		action = "SelectAlgorithm BFS";
 		this.setChanged();
 		this.notifyObservers();

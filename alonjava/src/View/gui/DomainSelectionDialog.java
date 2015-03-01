@@ -13,6 +13,10 @@ import org.eclipse.swt.widgets.Shell;
 
 public class DomainSelectionDialog extends Dialog
 {
+	public static final String HAGANA = "hagana";
+	public static final String MAZE = "maze";
+	
+	private String selection;
     private Shell shell;
 
     public DomainSelectionDialog(Shell parent)
@@ -62,31 +66,37 @@ public class DomainSelectionDialog extends Dialog
         data.horizontalSpan = 3;
         label.setLayoutData(data);
 
-        Button preview = new Button(shell, SWT.PUSH);
-        preview.setText("Maze");
+        Button maze = new Button(shell, SWT.PUSH);
+        maze.setText(MAZE);
         data = new GridData(SWT.FILL, SWT.END, true, true);
-        preview.setLayoutData(data);
-        preview.addSelectionListener(new SelectionAdapter()
+        maze.setLayoutData(data);
+        maze.addSelectionListener(new SelectionAdapter()
         {
             public void widgetSelected(SelectionEvent event)
             {
+            	selection = MAZE;
             	 shell.close();
             }
         });
 
-        Button delete = new Button(shell, SWT.PUSH);
-        delete.setText("Parking lot");
+        Button hagana = new Button(shell, SWT.PUSH);
+        hagana.setText(HAGANA);
         data = new GridData(SWT.FILL, SWT.END, true, true);
-        delete.setLayoutData(data);
-        delete.addSelectionListener(new SelectionAdapter()
+        hagana.setLayoutData(data);
+        hagana.addSelectionListener(new SelectionAdapter()
         {
             public void widgetSelected(SelectionEvent event)
             {
+            	selection = HAGANA;
             	shell.close();
             }
         });
 
-        shell.setDefaultButton(preview);
+        shell.setDefaultButton(maze);
     }
 
+    public String getSelection()
+    {
+    	return selection;
+    }
 }

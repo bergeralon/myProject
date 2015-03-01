@@ -1,8 +1,14 @@
 package Model;
 
+import java.util.HashMap;
 import java.util.Observable;
 
+import Algorithm.Action;
 import Algorithm.SearchDomain;
+import Algorithm.State;
+import Domain.HaganaDomain;
+import Domain.HaganaState;
+import Domain.MazeState;
 import clientServer.Client;
 import clientServer.MyProperties;
 
@@ -29,10 +35,17 @@ public class MyModel extends Observable implements Model {
 
 	@Override
 	public void selectDomain(String args) {
-		String[] arr = args.split(":");
-		String domainName = arr[0];
-		String domainArgs = arr[1];
-		domain = (DomainFactory.createDomain(domainName,domainArgs));
+		final String[] arr = args.split(":");
+		if (arr[0].equals("Hagana"))
+		{
+			domain = new HaganaDomain(arr[1], arr[2], arr[3]);
+		}
+		else
+		{
+			String domainName = arr[0];
+			String domainArgs = arr[1];
+			domain = DomainFactory.createDomain(domainName,domainArgs);
+		}
 	}
 	
 	@Override
